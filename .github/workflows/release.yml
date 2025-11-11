@@ -127,14 +127,9 @@ jobs:
         run: ls -R
         shell: bash
 
-      - name: Upload Release Assets
-        uses: svenstaro/upload-release-action@v2
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ needs.release.outputs.new_release_tag }}
-          overwrite: true
-          file_glob: true
-          file: dist/*.{AppImage,deb,rpm,zip,dmg,exe}
-          make_latest: true
+          name: build-artifacts
+          path: dist/*.{AppImage,deb,rpm,zip,dmg,exe}
+          if-no-files-found: warn

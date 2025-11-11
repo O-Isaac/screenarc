@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     name: Build & Upload Artifacts
-    if: needs.release.outputs.new_release_published == 'true'
     permissions:
       contents: write
     strategy:

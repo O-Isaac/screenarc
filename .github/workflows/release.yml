@@ -13,7 +13,7 @@ jobs:
       contents: write
     strategy:
       matrix:
-        os: [ubuntu-22.04, windows-latest, macos-latest]
+        os: [windows-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -90,9 +90,9 @@ jobs:
         run: ls -R
         shell: bash
 
-      - name: Upload Artifacts
+      - name: Upload all dist folder as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifacts
+          name: dist-artifacts-${{ github.run_id }}
           path: dist/**
-          if-no-files-found: warn
+          if-no-files-found: error
